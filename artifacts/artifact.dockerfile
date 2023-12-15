@@ -5,7 +5,7 @@ FROM node:16
 WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json
-COPY ../package*.json ./
+COPY package*.json ./
 
 # Install any needed packages
 RUN npm install
