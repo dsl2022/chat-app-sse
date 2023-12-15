@@ -93,7 +93,7 @@ jobs:
             -backend-config='bucket=${{ inputs.backend_s3_bucket }}' \
             -backend-config='key=chat-app-sse/terraform-${{ env.ECR_REPO_NAME }}.tfstate' \
             -backend-config='dynamodb_table=${{ inputs.backend_dynamodb_table }}'            
-        working-directory: ${{ github.action_path }}
+        working-directory: .terraform
 
       - name: Create ECR repo [TF apply]
         shell: bash
@@ -105,7 +105,7 @@ jobs:
             -var 'iam_role=arn:aws:iam::${{ inputs.aws_account_id }}:role/${{ inputs.github_iam_role }}' \
             -var 'aws_account_id=${{ inputs.aws_account_id }}' \
             -auto-approve
-        working-directory: ${{ github.action_path }}
+        working-directory: .terraform
 
       - name: Login to Amazon ECR
         id: login-ecr
