@@ -15,7 +15,7 @@ resource "aws_ecr_repository" "repository" {
 
 resource "aws_ecr_lifecycle_policy" "name" {
   repository = aws_ecr_repository.repository.name
-  policy     = templatefile(var.lifecycle_policy, {})
+  policy     = templatefile("../artifacts/policy.json", {})
 }
 
 resource "aws_ecr_registry_scanning_configuration" "scan_configuration" {
