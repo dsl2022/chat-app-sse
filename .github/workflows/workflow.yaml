@@ -4,11 +4,11 @@ on:
     inputs:
       path_to_dockerfile:
         description: Path to the dockerfile (default = 'Dockerfile')
-        default: "artifact/artifact.dockerfile"
+        default: "artifacts/artifact.dockerfile"
         type: string
       docker_build_dir:
         description: Docker build directory (default = '.')
-        default: "artifact"
+        default: "artifacts"
         type: string
       image_tag:
         description: Tag to apply to images.
@@ -16,7 +16,7 @@ on:
         default: snapshot-artifact
       lifecycle_policy_file:
         description: Path to the lifecycle policy JSON file (default = 'policy.json')
-        default: "/artifact/policy.json"
+        default: "/artifacts/policy.json"
         type: string
       backend_s3_bucket:
         description: Name of the S3bucket for Terraform backend
@@ -65,12 +65,6 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::${{ inputs.aws_account_id }}:role/github-actions-dsl
           aws-region: ${{ inputs.aws_region }}
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_wrapper: false
-
       - name: prepare ECR repo name based on the Github repository
         shell: bash
         run: |
@@ -80,33 +74,6 @@ jobs:
 
           # replace / with _
           echo "ECR_REPO_NAME=${repo//\//_}" >> $GITHUB_ENV
-
-      - name: TF init
-        shell: bash
-        run: |
-          set -eux
-          terraform init -upgrade -reconfigure \
-            -backend-config='skip_metadata_api_check=true' \
-            -backend-config='skip_region_validation=true' \
-            -backend-config='skip_credentials_validation=true' \
-            -backend-config='region=${{ inputs.aws_region }}' \
-            -backend-config='bucket=${{ inputs.backend_s3_bucket }}' \
-            -backend-config='key=chat-app-sse/terraform-${{ env.ECR_REPO_NAME }}.tfstate' \
-            -backend-config='dynamodb_table=${{ inputs.backend_dynamodb_table }}'            
-        working-directory: .terraform
-
-      - name: Create ECR repo [TF apply]
-        shell: bash
-        run: |
-          set -eux
-          terraform apply \
-            -var 'repository_name=${{ env.ECR_REPO_NAME }}' \
-            -var 'lifecycle_policy=${{ inputs.lifecycle_policy_file }}' \
-            -var 'iam_role=arn:aws:iam::${{ inputs.aws_account_id }}:role/${{ inputs.github_iam_role }}' \
-            -var 'aws_account_id=${{ inputs.aws_account_id }}' \
-            -auto-approve
-        working-directory: .terraform
-
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
@@ -127,3 +94,31 @@ jobs:
           echo "IMAGE $IMAGE_TAG is pushed to $ECR_REGISTRY/$ECR_REPOSITORY"
           echo "image_tag=$IMAGE_TAG" 
           echo "full_image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_wrapper: false          
+      - name: TF init
+        shell: bash
+        run: |
+          set -eux
+          terraform init -upgrade -reconfigure \
+            -backend-config='skip_metadata_api_check=true' \
+            -backend-config='skip_region_validation=true' \
+            -backend-config='skip_credentials_validation=true' \
+            -backend-config='region=${{ inputs.aws_region }}' \
+            -backend-config='bucket=${{ inputs.backend_s3_bucket }}' \
+            -backend-config='key=chat-app-sse/terraform-${{ env.ECR_REPO_NAME }}.tfstate' \
+            -backend-config='dynamodb_table=${{ inputs.backend_dynamodb_table }}'            
+        working-directory: .terraform
+      - name: Create ECR repo [TF apply]
+        shell: bash
+        run: |
+          set -eux
+          terraform apply \
+            -var 'repository_name=${{ env.ECR_REPO_NAME }}' \
+            -var 'lifecycle_policy=${{ inputs.lifecycle_policy_file }}' \
+            -var 'iam_role=arn:aws:iam::${{ inputs.aws_account_id }}:role/${{ inputs.github_iam_role }}' \
+            -var 'aws_account_id=${{ inputs.aws_account_id }}' \
+            -auto-approve
+        working-directory: .terraform
