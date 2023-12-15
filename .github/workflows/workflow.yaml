@@ -8,7 +8,7 @@ on:
         type: string
       docker_build_dir:
         description: Docker build directory (default = '.')
-        default: "artifacts"
+        default: "."
         type: string
       image_tag:
         description: Tag to apply to images.
