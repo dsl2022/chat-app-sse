@@ -18,9 +18,22 @@ resource "aws_ecs_task_definition" "app_task" {
           containerPort = 8080,
           hostPort      = 8080
         }
-      ]
+      ],
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-group         = aws_cloudwatch_log_group.ecs_log_group.name
+          awslogs-region        = "us-east-1" # Replace with your AWS region
+          awslogs-stream-prefix = "ecs"
+        }
+      },
+      
     }
   ])
+}
+
+resource "aws_cloudwatch_log_group" "ecs_log_group" {
+  name = "/ecs/chat-app" # You can choose a different name if preferred
 }
 
 resource "aws_ecs_service" "app_service" {
