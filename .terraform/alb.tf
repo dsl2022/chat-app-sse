@@ -10,7 +10,7 @@ resource "aws_lb" "app_lb" {
 
 resource "aws_lb_target_group" "app_tg" {
   name     = "chat-app-target-group"
-  port     = 80
+  port     = 8080
   protocol = "HTTP"
   target_type = "ip"
   vpc_id   = aws_vpc.chat_app_vpc.id

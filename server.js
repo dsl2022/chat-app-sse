@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = 3000;
+const PORT = 8080;
 const cors = require('cors');
 app.use(express.json()); 
 // Use CORS with default settings (allow requests from any origin)
@@ -21,6 +21,11 @@ function setSSEHeaders(req, res, next) {
 }
 let clients = [];
 // Route for chat endpoint
+app.get('/health',(req,res)=>{
+    res.status(200)
+    res.send("health")
+})
+
 app.get('/chat', setSSEHeaders, (req, res) => {
     // Function to send a message
 

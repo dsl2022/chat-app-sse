@@ -32,6 +32,7 @@ resource "aws_ecs_service" "app_service" {
   network_configuration {
     subnets = [aws_subnet.app_subnet_1.id, aws_subnet.app_subnet_2.id]
     security_groups = [aws_security_group.app_sg.id]
+    assign_public_ip = "ENABLED"
   }
 
   load_balancer {
