@@ -6,10 +6,6 @@ app.use(express.json());
 // Use CORS with default settings (allow requests from any origin)
 app.use(cors());
 
-// Or, to be more specific, you can configure CORS to only accept requests from your React app's origin
-app.use(cors({ origin: 'http://localhost:3001' }));
-
-
 // Middleware to set SSE headers
 function setSSEHeaders(req, res, next) {
     res.setHeader('Content-Type', 'text/event-stream');
