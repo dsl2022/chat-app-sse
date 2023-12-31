@@ -1,20 +1,7 @@
-The codebase for the chat application with Server-Sent Events (SSE) contains several important files that define its structure and functionality. Here's a brief overview of the key files:
-
-1. **server.js**: This is likely the main server file, containing the Node.js code that sets up and runs the server, including the SSE logic.
-
-2. **package.json**: This file lists the dependencies and may include scripts for running and testing the application.
-
-3. **Dockerfile**: Used for creating a Docker container for the application, indicating that the app is designed to be run in a containerized environment.
-
-4. **.env**: Contains environment variables that are crucial for the application's configuration.
-
-Based on this structure, here's a draft for the `README.md`:
-
----
-
 # Chat App with Server-Sent Events (SSE)
 
 This chat application utilizes Server-Sent Events (SSE) to enable real-time communication between the server and clients. It's built with Node.js and can be containerized using Docker.
+The project is deployed to AWS ECS through Terraform and Github action. 
 
 ## Getting Started
 
@@ -34,9 +21,9 @@ This chat application utilizes Server-Sent Events (SSE) to enable real-time comm
 
 ### Running the Application
 
-- To run the app directly:
+- To run the app locally:
   ```
-  node server.js
+  npm run dev
   ```
 - To run the app using Docker:
   ```
