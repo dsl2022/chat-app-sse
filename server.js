@@ -8,7 +8,7 @@ const ep = new EndPoint("gpt-4",".")
 app.use(express.json()); 
 // Use CORS with default settings (allow requests from any origin)
 app.use(cors());
-
+console.log("app ran")
 // Middleware to set SSE headers
 function setSSEHeaders(req, res, next) {
     res.setHeader('Content-Type', 'text/event-stream');
@@ -21,6 +21,7 @@ function setSSEHeaders(req, res, next) {
 let clients = [];
 // Route for chat endpoint
 app.get('/health',(req,res)=>{
+    console.log("ran health")
     res.status(200)
     res.send("health")
 })
