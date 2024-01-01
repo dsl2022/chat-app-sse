@@ -14,6 +14,23 @@ resource "aws_ecs_task_definition" "app_task" {
     {
       name  = "chat-app",
       image = aws_ecr_repository.repository.repository_url,
+      secrets = [{
+        name = "NODE_ENV"
+        valueFrom = "arn:aws:secretsmanager:us-east-1:212612999379:secret:prod/chat-app-sse/node-env-7RysqU"
+      },
+      {
+        name = "BASE_MOCK_API_URL"
+        valueFrom = "arn:aws:secretsmanager:us-east-1:212612999379:secret:prod/chat-app-sse/base_mock_api_url-0P60di"
+      },
+       {
+        name = "API_ENDPOINTS_CONFIG_PATH"
+        valueFrom = "arn:aws:secretsmanager:us-east-1:212612999379:secret:prod/chat-app-sse/api-endpoint-config-path-7gdscp"
+      },
+      {
+        name = "OPENAI_API_KEY"
+        valueFrom = "arn:aws:secretsmanager:us-east-1:212612999379:secret:prod/chat-app-sse/openai-key-JQrNWO"
+      }
+      ]
       portMappings = [
         {
           containerPort = 8080,

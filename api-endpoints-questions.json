@@ -1,0 +1,158 @@
+[
+    {
+        "endpoint": "GetProducts",
+        "question": "What are the latest products available in electronics?"
+    },
+    {
+        "endpoint": "GetProducts",
+        "question": "Show me affordable skincare products."
+    },
+    {
+        "endpoint": "GetProducts",
+        "question": "Can I see the top-rated books on your site?"
+    },
+    {
+        "endpoint": "GetProductDetails",
+        "question": "Tell me more about the Samsung Galaxy S21."
+    },
+    {
+        "endpoint": "GetProductDetails",
+        "question": "I need details on the leather backpack listed."
+    },
+    {
+        "endpoint": "GetProductDetails",
+        "question": "What are the specifications of the yoga mat on sale?"
+    },
+    {
+        "endpoint": "UserRegistration",
+        "question": "I want to create a new account."
+    },
+    {
+        "endpoint": "UserRegistration",
+        "question": "How do I sign up for your website?"
+    },
+    {
+        "endpoint": "UserRegistration",
+        "question": "Register me as a new user."
+    },
+    {
+        "endpoint": "UserLogin",
+        "question": "I need to log into my account."
+    },
+    {
+        "endpoint": "UserLogin",
+        "question": "How can I sign in?"
+    },
+    {
+        "endpoint": "UserLogin",
+        "question": "Login assistance needed."
+    },
+    {
+        "endpoint": "AddToCart",
+        "question": "Add the red dress in size M to my cart."
+    },
+    {
+        "endpoint": "AddToCart",
+        "question": "Put the wireless headphones in my shopping cart."
+    },
+    {
+        "endpoint": "AddToCart",
+        "question": "I want to add this book to my cart."
+    },
+    {
+        "endpoint": "RemoveFromCart",
+        "question": "Remove the silk scarf from my cart."
+    },
+    {
+        "endpoint": "RemoveFromCart",
+        "question": "I changed my mind, take out the sneakers from the cart."
+    },
+    {
+        "endpoint": "RemoveFromCart",
+        "question": "Delete the chocolate box from my shopping cart."
+    },
+    {
+        "endpoint": "UpdateCart",
+        "question": "Change the quantity of the coffee mugs to 4 in my cart."
+    },
+    {
+        "endpoint": "UpdateCart",
+        "question": "I want to update the size of the T-shirt in the cart to L."
+    },
+    {
+        "endpoint": "UpdateCart",
+        "question": "Update my cart, remove one of the two backpacks."
+    },
+    {
+        "endpoint": "Checkout",
+        "question": "I'm ready to checkout."
+    },
+    {
+        "endpoint": "Checkout",
+        "question": "Proceed to payment for my current cart items."
+    },
+    {
+        "endpoint": "Checkout",
+        "question": "How do I checkout with the items in my cart?"
+    },
+    {
+        "endpoint": "ProcessPayment",
+        "question": "I want to pay for my order."
+    },
+    {
+        "endpoint": "ProcessPayment",
+        "question": "Process payment using my saved credit card."
+    },
+    {
+        "endpoint": "ProcessPayment",
+        "question": "How do I complete payment for my purchase?"
+    },
+    {
+        "endpoint": "OrderHistory",
+        "question": "Show me my previous orders."
+    },
+    {
+        "endpoint": "OrderHistory",
+        "question": "Can you list my order history?"
+    },
+    {
+        "endpoint": "OrderHistory",
+        "question": "I need to see my past purchases."
+    },
+    {
+        "endpoint": "ProductSearch",
+        "question": "Search for waterproof watches."
+    },
+    {
+        "endpoint": "ProductSearch",
+        "question": "Find me books by J.K. Rowling."
+    },
+    {
+        "endpoint": "ProductSearch",
+        "question": "Look for gaming laptops available."
+    },
+    {
+        "endpoint": "SubmitReview",
+        "question": "I want to review the blender I bought."
+    },
+    {
+        "endpoint": "SubmitReview",
+        "question": "How do I leave a feedback for the camping tent?"
+    },
+    {
+        "endpoint": "SubmitReview",
+        "question": "Submit a review for the winter jacket I purchased."
+    },
+    {
+        "endpoint": "GetCategories",
+        "question": "What are the different product categories you have?"
+    },
+    {
+        "endpoint": "GetCategories",
+        "question": "List all categories of products."
+    },
+    {
+        "endpoint": "GetCategories",
+        "question": "Show me the range of categories available in your store."
+    }
+]
