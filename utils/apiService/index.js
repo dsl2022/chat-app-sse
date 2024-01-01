@@ -1,5 +1,9 @@
 const axios = require('axios');
-const BASE_URL = "http://localhost:4000"
+const dotenv = require('dotenv');
+dotenv.config()
+const BASE_MOCK_API_URL=process.env.BASE_MOCK_API_URL
+const NODE_ENV = process.env.NODE_ENV
+const BASE_URL = NODE_ENV==="dev"? "http://localhost:4000":BASE_MOCK_API_URL
 const makeRequest = async (endpoint, method) => {
   try {
     let response;

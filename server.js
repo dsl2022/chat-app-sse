@@ -52,11 +52,15 @@ app.post('/send-message', async (req, res) => {
     if (result && result.choices && result.choices.length > 0) {
         console.log(result.choices[0].message.content);
         const endpointDetails = JSON.parse(result.choices[0].message.content);
-
+        if(endpointDetails?.error){
+            sendMessageToClients({ user: 'AI', text: JSON.stringify(endpointDetails) });
+            return res.status(200).json({ message: "Message received" });
+        }
         if (endpointDetails) {
             const { endpoint, method } = endpointDetails;
             const data = await makeRequest(endpoint, method)
-            sendMessageToClients({ user: 'AI', text: data?.message });
+            // console.log(data)
+            sendMessageToClients({ user: 'AI', text: JSON.stringify(data) });
         }
     }
     res.status(200).json({ message: "Message received" });
