@@ -1,0 +1,70 @@
+{
+    "endpoints": [
+      {
+        "name": "GetProducts",
+        "endpoint": "/get-products",
+        "description": "Retrieves a list of products. Can be filtered by category, price range, and sorted by popularity or ratings."
+      },
+      {
+        "name": "GetProductDetails",
+        "endpoint": "/get-product-details",
+        "description": "Provides detailed information about a specific product, including descriptions, images, and reviews."
+      },
+      {
+        "name": "UserRegistration",
+        "endpoint": "/user-registration",
+        "description": "Allows new users to register. Requires user details such as name, email, and password."
+      },
+      {
+        "name": "UserLogin",
+        "endpoint": "/user-login",
+        "description": "Authenticates a user and provides a session token for subsequent requests."
+      },
+      {
+        "name": "AddToCart",
+        "endpoint": "/add-to-cart",
+        "description": "Adds a specified product to the user's shopping cart."
+      },
+      {
+        "name": "RemoveFromCart",
+        "endpoint": "/remove-from-cart",
+        "description": "Removes a specified product from the user's shopping cart."
+      },
+      {
+        "name": "UpdateCart",
+        "endpoint": "/update-cart",
+        "description": "Updates quantities of products in the shopping cart."
+      },
+      {
+        "name": "Checkout",
+        "endpoint": "/checkout",
+        "description": "Initiates the checkout process for the items in the shopping cart."
+      },
+      {
+        "name": "ProcessPayment",
+        "endpoint": "/process-payment",
+        "description": "Processes payment for the order. Requires payment details like credit card information."
+      },
+      {
+        "name": "OrderHistory",
+        "endpoint": "/order-history",
+        "description": "Retrieves the order history of a user."
+      },
+      {
+        "name": "ProductSearch",
+        "endpoint": "/product-search",
+        "description": "Allows searching for products using keywords."
+      },
+      {
+        "name": "SubmitReview",
+        "endpoint": "/submit-review",
+        "description": "Allows users to submit reviews for products they have purchased."
+      },
+      {
+        "name": "GetCategories",
+        "endpoint": "/get-categories",
+        "description": "Retrieves a list of product categories available in the store."
+      }
+    ]
+  }
+  
