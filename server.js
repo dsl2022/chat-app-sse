@@ -7,7 +7,19 @@ const {makeRequest} = require("./utils/apiService")
 const ep = new EndPoint("gpt-4",".")
 app.use(express.json()); 
 // Use CORS with default settings (allow requests from any origin)
-app.use(cors());
+const allowedOrigins = ['http://localhost:3000', 'https://d2f0d82fydy0jb.cloudfront.net'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+app.use(cors(corsOptions));
 console.log("app ran")
 // Middleware to set SSE headers
 function setSSEHeaders(req, res, next) {
