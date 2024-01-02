@@ -1,11 +1,16 @@
 const express = require('express');
 const app = express();
 const PORT = 8080;
+const dotenv = require('dotenv');
+dotenv.config()
 const cors = require('cors');
 const {EndPoint} = require('llm-api-endpoints-agents')
 const {makeRequest} = require("./utils/apiService")
 const ep = new EndPoint("gpt-4",".")
 app.use(express.json()); 
+const API_ENDPOINTS_CONFIG_PATH = process.env.API_ENDPOINTS_CONFIG_PATH
+console.log(typeof API_ENDPOINTS_CONFIG_PATH)
+console.log("test API_ENDPOINTS_CONFIG_PATH", API_ENDPOINTS_CONFIG_PATH)
 // Use CORS with default settings (allow requests from any origin)
 const allowedOrigins = ['http://localhost:3000', 'https://d2f0d82fydy0jb.cloudfront.net'];
 
@@ -62,7 +67,7 @@ function sendMessageToClients(message) {
 app.post('/send-message', async (req, res) => {
     const userMessage = req.body.message;
     console.log({userMessage})
-    const result =  await ep.selectEndpoint(userMessage)
+    const result =  await ep.selectEndpoint(userMessage,"./api-endpoints.json")
     console.log("tst result",result)
     // console.log(result.choices[0].message.content)
     if (result && result.choices && result.choices.length > 0) {
