@@ -28,7 +28,8 @@ app.get('/health',(req,res)=>{
 
 app.get('/chat', setSSEHeaders, (req, res) => {
     // Function to send a message
-
+    console.log("chat ran")
+    console.log("res test",res)
     clients.push(res); 
 
     // Handle client disconnect
@@ -48,7 +49,9 @@ function sendMessageToClients(message) {
 // Endpoint to receive messages from the client
 app.post('/send-message', async (req, res) => {
     const userMessage = req.body.message;
-    const result =  await ep.selectEndpoint(userMessage)        
+    console.log({userMessage})
+    const result =  await ep.selectEndpoint(userMessage)
+    console.log("tst result",result)
     // console.log(result.choices[0].message.content)
     if (result && result.choices && result.choices.length > 0) {
         console.log(result.choices[0].message.content);
@@ -59,8 +62,9 @@ app.post('/send-message', async (req, res) => {
         }
         if (endpointDetails) {
             const { endpoint, method } = endpointDetails;
+            console.log({endpoint, method})
             const data = await makeRequest(endpoint, method)
-            // console.log(data)
+            console.log("test data",data)
             sendMessageToClients({ user: 'AI', text: JSON.stringify(data) });
         }
     }
