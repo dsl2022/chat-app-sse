@@ -7,7 +7,6 @@ const cors = require('cors');
 const {OPENAI_API_KEY} = JSON.parse(process.env.OPENAI_API_KEY)
 const {EndPoint} = require('llm-api-endpoints-agents')
 const {makeRequest} = require("./utils/apiService")
-console.log(OPENAI_API_KEY)
 const ep = new EndPoint("gpt-4",OPENAI_API_KEY)
 app.use(express.json()); 
 const {API_ENDPOINTS_CONFIG_PATH} = JSON.parse(process.env.API_ENDPOINTS_CONFIG_PATH)
@@ -67,11 +66,8 @@ function sendMessageToClients(message) {
 
 // Endpoint to receive messages from the client
 app.post('/send-message', async (req, res) => {
-    const userMessage = req.body.message;
-    console.log({userMessage})
-    const result =  await ep.selectEndpoint(userMessage,"./api-endpoints.json")
-    console.log("tst result",result)
-    // console.log(result.choices[0].message.content)
+    const userMessage = req.body.message;    
+    const result =  await ep.selectEndpoint(userMessage,API_ENDPOINTS_CONFIG_PATH)
     if (result && result.choices && result.choices.length > 0) {
         console.log(result.choices[0].message.content);
         const endpointDetails = JSON.parse(result.choices[0].message.content);
@@ -80,11 +76,10 @@ app.post('/send-message', async (req, res) => {
             return res.status(200).json({ message: "Message received" });
         }
         if (endpointDetails) {
-            const { endpoint, method } = endpointDetails;
-            console.log({endpoint, method})
-            const data = await makeRequest(endpoint, method)
-            console.log("test data",data)
-            sendMessageToClients({ user: 'AI', text: JSON.stringify(data) });
+            const { endpoint, method } = endpointDetails;            
+            const data = await makeRequest(endpoint, method)  
+
+            sendMessageToClients({ user: 'AI', text: JSON.stringify({data,endpoint,method}) });
         }
     }
     res.status(200).json({ message: "Message received" });
