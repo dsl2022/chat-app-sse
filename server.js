@@ -4,26 +4,34 @@ const PORT = 8080;
 const dotenv = require('dotenv');
 dotenv.config()
 const cors = require('cors');
-const {OPENAI_API_KEY} = JSON.parse(process.env.OPENAI_API_KEY)
+let OPENAI_API_KEY;
+let API_ENDPOINTS_CONFIG_PATH;
+const NODE_ENV = process.env.NODE_ENV
+if(NODE_ENV==="dev"){
+    OPENAI_API_KEY = process.env.OPENAI_API_KEY
+    API_ENDPOINTS_CONFIG_PATH = process.env.API_ENDPOINTS_CONFIG_PATH
+}else{
+    OPENAI_API_KEY = JSON.parse(process.env.OPENAI_API_KEY).OPENAI_API_KEY
+    API_ENDPOINTS_CONFIG_PATH = JSON.parse(process.env.API_ENDPOINTS_CONFIG_PATH).API_ENDPOINTS_CONFIG_PATH
+}
 const {EndPoint} = require('llm-api-endpoints-agents')
 const {makeRequest} = require("./utils/apiService")
 const ep = new EndPoint("gpt-4",OPENAI_API_KEY)
 app.use(express.json()); 
-const {API_ENDPOINTS_CONFIG_PATH} = JSON.parse(process.env.API_ENDPOINTS_CONFIG_PATH)
-console.log(typeof API_ENDPOINTS_CONFIG_PATH)
-console.log("test API_ENDPOINTS_CONFIG_PATH", API_ENDPOINTS_CONFIG_PATH)
-// Use CORS with default settings (allow requests from any origin)
-const allowedOrigins = ['http://localhost:3000', 'http://d2f0d82fydy0jb.cloudfront.net'];
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
+
+// Use CORS with default settings (allow requests from any origin)
+// const allowedOrigins = ['http://localhost:3000', 'http://d2f0d82fydy0jb.cloudfront.net'];
+
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
 
 app.use(cors());
 console.log("app ran")
@@ -47,7 +55,7 @@ app.get('/health',(req,res)=>{
 app.get('/chat', setSSEHeaders, (req, res) => {
     // Function to send a message
     console.log("chat ran")
-    console.log("res test",res)
+    // console.log("res test",res)
     clients.push(res); 
 
     // Handle client disconnect
