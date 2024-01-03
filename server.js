@@ -13,7 +13,7 @@ const {API_ENDPOINTS_CONFIG_PATH} = JSON.parse(process.env.API_ENDPOINTS_CONFIG_
 console.log(typeof API_ENDPOINTS_CONFIG_PATH)
 console.log("test API_ENDPOINTS_CONFIG_PATH", API_ENDPOINTS_CONFIG_PATH)
 // Use CORS with default settings (allow requests from any origin)
-const allowedOrigins = ['http://localhost:3000', 'https://d2f0d82fydy0jb.cloudfront.net'];
+const allowedOrigins = ['http://localhost:3000', 'http://d2f0d82fydy0jb.cloudfront.net'];
 
 const corsOptions = {
   origin: function (origin, callback) {
