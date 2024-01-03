@@ -25,7 +25,7 @@ const corsOptions = {
   }
 }
 
-app.use(cors(corsOptions));
+app.use(cors());
 console.log("app ran")
 // Middleware to set SSE headers
 function setSSEHeaders(req, res, next) {
