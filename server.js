@@ -4,9 +4,10 @@ const PORT = 8080;
 const dotenv = require('dotenv');
 dotenv.config()
 const cors = require('cors');
+const {OPENAI_API_KEY} = process.env.OPENAI_API_KEY
 const {EndPoint} = require('llm-api-endpoints-agents')
 const {makeRequest} = require("./utils/apiService")
-const ep = new EndPoint("gpt-4",".")
+const ep = new EndPoint("gpt-4",OPENAI_API_KEY)
 app.use(express.json()); 
 const API_ENDPOINTS_CONFIG_PATH = process.env.API_ENDPOINTS_CONFIG_PATH
 console.log(typeof API_ENDPOINTS_CONFIG_PATH)
